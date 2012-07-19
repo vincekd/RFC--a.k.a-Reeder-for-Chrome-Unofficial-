@@ -1,0 +1,93 @@
+<html>
+	<head>
+		<title>Reeder for Chrome (Unofficial) - Options</title>
+	</head>
+	
+	<style type="text/css">
+		body { padding: 50px; width: 600px; margin: auto; background: #F9FBF6; color: #4F4E48; font: 14px Helvetica, sans-serif; }
+		h2 { border-bottom: 1px dashed #ddd; }
+	</style>
+	
+	<script src="jquery-1.6.4.min.js"></script>
+	<script>
+        function load_config() {
+            if (localStorage['gb'] == 0) {
+                $('#gb').prop('checked', false);
+                $('#gb_username').prop('disabled', true);
+            }
+
+            if (localStorage['gb_username'] == 0)
+                $('#gb_username').prop('checked', false);
+				
+            if (localStorage['nav_home'] == 0)
+                $('#nav_home').prop('checked', false);
+				
+            if (localStorage['nav_recommended'] == 0)
+                $('#nav_recommended').prop('checked', false);
+                
+            if (localStorage['bottombar_previousitem'] == 0)
+                $('#bottombar_previousitem').prop('checked', false);
+				
+            if (localStorage['markasread_menu'] == 0)
+                $('#markasread_single').prop('checked', true);
+                
+            if (localStorage['hotkey_3col'] == 0)
+                $('#hotkey_3col').prop('checked', false);
+        }
+    
+		function update() {
+			localStorage['gb'] = 0;
+            $('#gb_username').prop('disabled', true);
+			if ($('#gb').is(':checked') ) {
+				localStorage['gb'] = 1;
+                $('#gb_username').prop('disabled', false);
+            }
+                
+			localStorage['gb_username'] = 0;
+			if ($('#gb_username').is(':checked') )
+				localStorage['gb_username'] = 1;
+				
+			localStorage['nav_home'] = 0;
+			if ($('#nav_home').is(':checked') )
+				localStorage['nav_home'] = 1;
+				
+			localStorage['nav_recommended'] = 0;
+			if ($('#nav_recommended').is(':checked') )
+				localStorage['nav_recommended'] = 1;
+
+			localStorage['bottombar_previousitem'] = 0;
+			if ($('#bottombar_previousitem').is(':checked') )
+				localStorage['bottombar_previousitem'] = 1;
+				
+			localStorage['markasread_menu'] = 0;
+			if ($('#markasread_menu').is(':checked') )
+				localStorage['markasread_menu'] = 1;
+                
+			localStorage['hotkey_3col'] = 0;
+			if ($('#hotkey_3col').is(':checked') )
+				localStorage['hotkey_3col'] = 1;
+				
+			$('#notification').css('visibility', 'visible');
+		}
+	</script>
+	
+	<body onload="load_config()">
+        <h1>Reeder for Chrome (Unofficial) - Options</h1>
+        <h3 id="notification" style="color: #A55; visibility:hidden;"><i>*Please reload your Google Reader page for changes to take effect.</i></h3>
+        <br />
+        <h2>Show/Hide Elements</h2>
+        <input type="checkbox" id="gb" checked="checked" onchange="update()" /> Google-Bar<br />
+        <input type="checkbox" id="gb_username" checked="checked" onchange="update()" /> Google-Bar: Username<br />
+		<input type="checkbox" id="nav_home" checked="checked" onchange="update()" /> Navigation: Home<br />
+		<input type="checkbox" id="nav_recommended" checked="checked" onchange="update()" /> Navigation: Recommended items<br />
+        <input type="checkbox" id="bottombar_previousitem" checked="checked" onchange="update()" /> Bottom-Bar: Previous Button<br />
+        <br />
+		<h2>Mark as Read Button</h2>
+		<input type="radio" name="mar" id="markasread_menu" checked="checked" onchange="update()" /> Menu select<br />
+		<input type="radio" name="mar" id="markasread_single" onchange="update()" /> Single click<br />
+		<br />
+        <h2>Hotkeys</h2>
+        <h3>List View / 3Column Mode</h3>
+        <input type="checkbox" id="hotkey_3col" checked="checked" onchange="update()" />Enable (Space, PgDown, PgUp, Home, End, Up, Down)<br />
+	</body>
+</html>
